@@ -93,23 +93,13 @@ class FileUploader
             $size['upload_url'] = $webPath . '/' . $size['folder'] . '/';
         }
 
-        $originals = $options['originals'];
-
-        $uploadDir = $filePath . '/' . $originals['folder'] . '/';
-
-        foreach ($sizes as &$size)
-        {
-            @mkdir($size['upload_dir'], 0777, true);
-        }
-
-        @mkdir($uploadDir, 0777, true);
         $upload_handler = new \PunkAve\FileUploaderBundle\BlueImp\UploadHandler(
             array(
-                'upload_dir' => $uploadDir,
-                'upload_url' => $webPath . '/' . $originals['folder'] . '/',
+                'upload_dir' => $filePath . '/',
+                'upload_url' => $webPath . '/',
                 'script_url' => $options['request']->getUri(),
-                'image_versions' => $sizes,
-                'accept_file_types' => $allowedExtensionsRegex,
+                'image_versions'      => $sizes,
+                'accept_file_types'   => $allowedExtensionsRegex,
                 'max_number_of_files' => $options['max_number_of_files'],
             ));
 
